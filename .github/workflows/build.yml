@@ -11,6 +11,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Show files
+        run: dir
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -18,14 +21,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: piano-symbols-desktop
 
-      - name: Build app
+      - name: Build Windows installer
         run: npm run dist
-        working-directory: piano-symbols-desktop
 
       - name: Upload installer
         uses: actions/upload-artifact@v4
         with:
           name: piano-symbols-windows-installer
-          path: piano-symbols-desktop/dist/*.exe
+          path: release/*.exe
